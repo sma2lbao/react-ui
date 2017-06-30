@@ -1,0 +1,6 @@
+@charset "UTF-8";
+*{box-sizing: border-box;}
+.select-def{min-width: 240px;height: 46px;line-height: 46px;background-color: #fff;border: 1px solid #dfe7eb;display: inline-block;padding: 0 15px;color: #78909c;font-size: 13px;border-radius: 3px;position: relative;padding-right: 40px;cursor: default;}
+.select-def i{display: inline-block;width: 0;height: 0;border: 5px solid;border-color: #3a4563 transparent transparent transparent;position: absolute;right: 20px;top: 50%;margin-top: -5px;}
+.select-def:hover{background-color: #fbfeff;color: #3a4563;box-shadow: 0 4px 5px #ddd;}
+.select-def-focus{box-shadow: 0 2px 5px #ddd inset;background-color: #fbfeff;}
