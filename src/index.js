@@ -1,24 +1,36 @@
 import React, { Compoent } from 'react'
 import ReactDOM from 'react-dom'
 // import App from './App.jsx'
-// import App from '@/Component/product-button/GB-Prod-button.jsx'
-import App from './component/button/GB-button.jsx'
-// import App from './component/dropdown-button/GB-Dropdown-button.jsx'
-// import App from './component/input-select/GB-select.jsx'
-// import Option from './component/input-select/GB-option.jsx'
+import GBProdbutton from '@/Component/product-button/GB-Prod-button.jsx'
+import GBbutton from './component/button/GB-button.jsx'
+import GBDropdownbutton from './component/dropdown-button/GB-Dropdown-button.jsx'
+import GBselect from './component/input-select/GB-select.jsx'
+import GBoption from './component/input-select/GB-option.jsx'
+import GBradio from './component/radio/GB-radio.jsx'
+import GBTogglebbutton from './component/toggle-button/GB-Toggle-button.jsx'
 
-ReactDOM.render(<App
-  onChange={(value) => console.log(value)}
-  >
-    <Option text="ddd" id="1" />
-    <Option text="ddd" id="1" />
-    <Option text="ddd" id="1" />
-    <Option text="ddd" id="1" />
-    <Option text="ddd" id="1" />
-    <Option text="ddd" id="1" />
-    <Option text="ddd" id="1" />
-    <Option text="ddd" id="1" />
-    <Option text="ddd" id="1" />
-  </App>
-  ,
+
+const App = () => {
+  return (
+    <div>
+      <GBbutton style={{ width: '200px' }} />
+
+      <GBProdbutton />
+
+      <GBDropdownbutton text="下载" />
+
+      <GBselect>
+        <GBoption text="122" />
+        <GBoption />
+        <GBoption />
+      </GBselect>
+
+      <GBradio onChange={(value) => console.log(value)} default={true} type="circle" disabled={false}/>
+
+      <GBTogglebbutton onChange={(value) => console.log(value)} default={true} />
+    </div>
+  )
+}
+
+ReactDOM.render(<App />,
  document.getElementById('root'));

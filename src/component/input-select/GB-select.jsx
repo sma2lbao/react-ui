@@ -19,8 +19,9 @@ export default class GB_select extends Component {
   }
 
   handleChildClick(event) {
-
-    this.props.onChange(event.target.innerText)
+    if(this.props.onChange) {
+      this.props.onChange(event.target.innerText)
+    }
     this.refs.select.innerText = event.target.innerText
     // this.props.text = event.target.innerText
     // 关闭选项
@@ -44,9 +45,9 @@ export default class GB_select extends Component {
 
   render() {
     return (
-      <div style={{display: 'inline-block'}} >
+      <div style={{display: 'inline-block'}} className={cx(styles.parentWrap)} >
         <div className={cx(styles.selectDef)} style={this.props.style} onClick={this.toggleOptEl.bind(this)} ref="btn" >
-          <span ref="select"></span><i></i>
+          <span className={cx(styles.selectVal)} ref="select"></span><i></i>
         </div>
         <div className={cx(styles.init, styles.posR) } style={{ display: 'none' }} ref="optEl" >
           <ul style={{display: 'inline-block'}} className={cx(styles.posOpt)}>
@@ -65,6 +66,8 @@ export default class GB_select extends Component {
   componentDidMount() {
       if(this.props.children) {
         this.refs.select.innerText = !this.props.children[0] ? this.props.children.props.text : this.props.children[0].props.text
+        console.log(this.refs.select.innerText)
+        this.refs.select.innerText ? this.refs.select.innerText = this.refs.select.innerText : this.refs.select.innerText = ''
       }
       React.Children.map(this.props.children, (child) => {
         if(child.props.selected) {

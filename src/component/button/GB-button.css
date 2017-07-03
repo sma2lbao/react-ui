@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .base{box-sizing: border-box;}
 
-.button{composes: base;border: none;text-align: center;outline: none;font-family: Avenir;font-weight: 600;}
+.button{composes: base;border: none;text-align: center;outline: none;font-family: Avenir;font-weight: 600;vertical-align: middle;}
 
 .sizeNormal{height: 50px;min-width: 160px;padding: 0 30px;line-height: 50px;border-radius: 25px;}
 .sizeSmall{height: 35px;line-height: 35px;min-width: 90px;padding: 0 25px;border-radius: 17.5px;}

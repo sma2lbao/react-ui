@@ -33,7 +33,7 @@
 .disabled:hover{background-color: #d8e1e5; color: #9bafba;cursor: not-allowed;box-shadow: none;}
 .disabled:focus{background-color: #d8e1e5; color: #9bafba;cursor: not-allowed;box-shadow: none;}
 
-.dropdownSize{height: 40px;line-height: 40px;padding: 0 15px;border: none;border-radius: 3px;outline: none;}
+.dropdownSize{height: 40px;line-height: 40px;padding: 0 15px;border: none;border-radius: 3px;outline: none;vertical-align: middle;}
 .icon{width: 0;height: 0;display: inline-block;border: 5px solid #fff;border-color: #fff transparent transparent transparent;margin-left: 6px;vertical-align: text-bottom;}
 .disabledIcon{border-color: #9bafba transparent transparent transparent;}
 
