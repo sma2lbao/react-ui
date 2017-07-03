@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import GBbutton from './component/button/GB-button.jsx'
 import GBProdbutton from '@/Component/product-button/GB-Prod-button.jsx'
 import GBbutton from './component/button/GB-button.jsx'
 import GBDropdownbutton from './component/dropdown-button/GB-Dropdown-button.jsx'
@@ -24,8 +23,10 @@ export default class App extends Component {
     return(
       <div>
         <GBMultioption />
-        <br />
-        <GBpaging size={20} total={385} current={1} />
+        <hr />
+        <GBbutton disabled={true} text="hi" />
+        <hr />
+        <GBpaging onChange={(askPage) => console.log('请求页面：%d', askPage)} />
       </div>
     )
   }
