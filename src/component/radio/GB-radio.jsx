@@ -27,8 +27,10 @@ export default class GB_radio extends Component {
     if(this.props.disabled) {
       return
     }
-    
-    this.props.onChange(!this.state.value)
+
+    if(this.props.onChange) {
+      this.props.onChange(!this.state.value)
+    }
 
     this.setState({
       value: !this.state.value

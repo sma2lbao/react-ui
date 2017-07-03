@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.msgAlert{padding: 10px 25px 10px 10px; width: 210px;line-height: 16px;font-size: 12px;color: #3e4968;border-radius: 5px;border-top: 3px solid #f16856;background-color: #fff;min-height: 20px;overflow: hidden;display: inline-block;box-sizing: border-box;box-shadow: 2px 2px 5px #ddd;}
+.msgIcon{float: left;width: 15px;height: 15px;border-radius: 50%;background-color: #3e4968;margin-right: 6px;}
+.msgComt{float: left;width: 152px;}
+.msgAlertTitle{font-weight: 600;}
+.defIcon{display: inline-block;width: 100%;height: 100%;text-align: center;line-height: 100%;}
+.defIcon::before{content: '!';color: #fff;font-size: 12px;font-style: normal;}
+.msgHover{color: #fff;font-size: 12px;background-color: #29324a;border-radius: 5px;padding: 10px 15px;display: inline-block;max-width: 200px;line-height: 20px;position: relative;}
+.msgHoverTitle{font-weight: 600;}
+.msgHoverText{width: 100%;word-break: break-word;}
+.msgHoverLeftArrow{position: absolute;display: inline-block;width: 0;height: 0;border: 6px solid;border-color: transparent #29324a transparent transparent;left: -12px;top: 50%;margin-top: -6px;}
+.msgHoverRightArrow{position: absolute;display: inline-block;width: 0;height: 0;border: 6px solid;border-color: transparent transparent transparent #29324a;right: -12px;top: 50%;margin-top: -6px;}
+.msgHoverTopArrow{position: absolute;display: inline-block;width: 0;height: 0;border: 6px solid;border-color: transparent transparent #29324a transparent;left: 50%;top: -12px;margin-left: -6px;}
+.msgHoverBottomArrow{position: absolute;display: inline-block;width: 0;height: 0;border: 6px solid;border-color: #29324a transparent transparent transparent;left: 50%;bottom: -12px;margin-left: -6px;}

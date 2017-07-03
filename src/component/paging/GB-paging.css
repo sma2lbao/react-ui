@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.pageWrapper{display: inline-block;}
+.pageItem{height: 40px;line-height: 40px;text-align: center;color: #77909d;display: inline-block;width: 52px;background-color: #fff;border: 1px solid #e3ebef;cursor: pointer;font-weight: 600;box-sizing: border-box;}
+.pageItem:first-child{width: 90px;border-top-left-radius: 20px;border-bottom-left-radius: 20px;padding-left: 10px;}
+.pageItem:last-child{width: 90px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;padding-right: 10px;}
+.pageItem + .pageItem{border-left-color: transparent;}
+.pageItem:hover{background-color: #1abcb0;border-color: #1abcb0;color: #fff;}
+.pageItemActive:hover,
+.pageItemActive{background-color: #29324a;border-color: #29324a;color: #fff;}
