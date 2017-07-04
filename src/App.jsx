@@ -33,7 +33,7 @@ export default class App extends Component {
         <hr />
         <GBcarousel timeout={4000} onChange={(value, index) => console.log('访问图片：%s', value)} />
         <hr />
-        <GBrefresh />
+        <GBrefresh playing={true} radius={80} color="red" bgColor="#f5f8fa"/>
       </div>
     )
   }
