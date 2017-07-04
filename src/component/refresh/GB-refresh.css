@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+.refreshWrap{height: 40px;line-height: 40px;border: 1px solid #ddd;}
+.refreshDef{display: inline-block;border-radius: 50%;width: 0;height: 0;border: 20px solid; border-color: #1abcb0 transparent #1abcb0 #1abcb0;position: relative;}
+.refreshFull{border-color: #1abcb0;}
+
+.bean{height: 10px;width: 10px;background-color: #f16856;border-radius: 50%;display:inline-block;}
+.refreshFull .bean{display: none;}

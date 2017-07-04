@@ -1,0 +1,17 @@
+@charset "UTF-8";
+.hidden{visibility: hidden;}
+.wrap{min-width: 960px;}
+.imgWrap{width: 100%;height: 400px;background-color: #ddd;overflow: hidden;}
+.imgNav{width: 50%;margin: 0 auto;height: 1px;background-color: #9db1bc;margin-top: 40px;display: flex;}
+.imgPrimary{width: 50%;height: 100%;display: inline-block;border: 1px solid #ddd;box-sizing: border-box;float: left;background-color: #e5edf0;}
+.imgPrimary img{width: 100%;height: 100%;}
+.imgSecond{width: 20%;height: 100%;display: inline-block;border: 1px solid #ddd;box-sizing: border-box;float: left;background-color: #e5edf0;position: relative;overflow: hidden;}
+.imgLeftHandle{height: 100%;width: 250%;position: absolute;right: 0;top: 0;}
+.imgRightHandle{height: 100%;width: 250%;position: absolute;left: 0;top: 0;}
+.imgSecond img{width: 100%;height: 100%;}
+.imgCtrl{display: inline-block;width: 5%;height: 100%;box-sizing: border-box;float: left;background-color: #fff;position: relative;}
+.leftArrow{position: absolute;top: 50%;left: 50%;display: inline-block;width: 16px;height: 16px;border: 2px solid;margin-top: -8px;margin-left: -4px;transform: rotate(45deg);border-color: transparent transparent #9db1bc #9db1bc;}
+.rightArrow{position: absolute;top: 50%;left: 50%;display: inline-block;width: 16px;height: 16px;border: 2px solid #9db1bc;margin-top: -8px;margin-left: -12px;transform: rotate(45deg);border-color: #9db1bc #9db1bc transparent transparent;}
+.imgCtrl:hover .leftArrow{border-color: transparent transparent #3e4968 #3e4968;}
+.imgCtrl:hover .rightArrow{border-color: #3e4968 #3e4968 transparent transparent;}
+.imgNavItem{height: 3px;background-color: #1abcb0;flex: 1;}
