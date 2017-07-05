@@ -13,7 +13,7 @@ import GBpop from './component/pop/GB-pop.jsx'
 import GBpaging from './component/paging/GB-paging.jsx'
 import GBcarousel from './component/carousel/GB-carousel.jsx'
 import GBrefresh from './component/refresh/GB-refresh.jsx'
-
+import GBRicheditor from './component/rich-editor/GB-Rich-editor.jsx'
 
 export default class App extends Component {
   constructor(props) {
@@ -34,6 +34,8 @@ export default class App extends Component {
         <GBcarousel timeout={4000} onChange={(value, index) => console.log('访问图片：%s', value)} />
         <hr />
         <GBrefresh playing={true} radius={80} color="red" bgColor="#f5f8fa"/>
+        <hr />
+        <GBRicheditor />
       </div>
     )
   }

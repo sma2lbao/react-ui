@@ -48,7 +48,7 @@ const config = {
         exclude: path.resolve(__dirname, 'node_modules')
       },
       {
-        test: /\.(gif|jpe?g|png|svg)(\?.*)?$/,
+        test: /\.(gif|jpe?g|png|svg|eot|ttf|woff|woff2)(\?.*)?$/,
         use: {
           loader: 'url-loader',
           options: {
