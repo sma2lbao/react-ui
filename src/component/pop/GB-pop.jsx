@@ -54,6 +54,5 @@ export default class GB_pop extends Component {
   componentDidMount() {
     const modalHei = this.refs.modal.clientHeight
     this.refs.modal.style.marginTop = -modalHei/2 + 'px'
-    console.log(modalHei)
   }
 }

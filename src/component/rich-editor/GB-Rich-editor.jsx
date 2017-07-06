@@ -2,6 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import styles from './GB-Rich-editor.css'
 import cns from 'classnames/bind'
 import fa from 'font-awesome/css/font-awesome.css'
+import GBpop from '../pop/GB-pop.jsx'
+import GBInputtext from '../input-text/GB-Input-text.jsx'
+import GBbutton from '../button/GB-button.jsx'
 let cx = cns.bind(styles)
 let fab = cns.bind(fa)
 
@@ -18,7 +21,18 @@ export default class GB_Rich_editor extends Component {
     super(props)
     this.state = {
       disableRightMenu: false,
-      active: ''
+      active: '',
+      isBold: false,
+      isItalic: false,
+      isUnderline: false,
+      align: 'left',
+      dent: '',
+      list: '',
+      imgPopStatu: false,
+      range: new Object(),
+      imgSrc: '',
+      imgHei: '',
+      imgWid: '',
     }
   }
 
@@ -36,70 +50,70 @@ export default class GB_Rich_editor extends Component {
 
   handleBold() {
     this.setState({
-      active: 'bold'
+      isBold: !this.state.isBold
     })
     document.execCommand('bold')
   }
 
   handleItalic() {
     this.setState({
-      active: 'italic'
+      isItalic: !this.state.isItalic
     })
     document.execCommand('italic');
   }
 
   handleUnderline() {
     this.setState({
-      active: 'underline'
+      isUnderline: !this.state.isUnderline
     })
     document.execCommand('underline');
   }
 
   handleJustifyLeft() {
     this.setState({
-      active: 'align-left'
+      align: 'left'
     })
     document.execCommand('justifyLeft');
   }
 
   handleJustifyCenter() {
     this.setState({
-      active: 'align-center'
+      align: 'center'
     })
     document.execCommand('justifyCenter');
   }
 
   handleJustifyRight() {
     this.setState({
-      active: 'align-right'
+      align: 'right'
     })
     document.execCommand('justifyRight');
   }
 
   handleIndent() {
     this.setState({
-      active: 'indent'
+      dent: 'indent'
     })
     document.execCommand('indent');
   }
 
   handleOutdent() {
     this.setState({
-      active: 'outdent'
+      dent: 'outdent'
     })
     document.execCommand('outdent');
   }
 
   handleInsertUnorderedList() {
     this.setState({
-      active: 'list-ul'
+      list: 'list-ul'
     })
     document.execCommand('insertUnorderedList');
   }
 
   handleInsertOrderedList() {
     this.setState({
-      active: 'list-ol'
+      list: 'list-ol'
     })
     document.execCommand('insertOrderedList');
   }
@@ -112,17 +126,22 @@ export default class GB_Rich_editor extends Component {
   }
 
   handleInsertImage() {
+    let sel = window.getSelection()
+    let range = sel.getRangeAt(0)
+    console.log(range)
     this.setState({
-      active: 'image'
+      active: 'image',
+      range: range,
+      imgPopStatu: true
     })
-    document.execCommand('insertImage', false, 'dfsdf');
   }
 
   handleInsertVideo() {
+
     this.setState({
       active: 'play'
     })
-    document.execCommand('insertHTML', false, '<div>vide</div>');
+    document.execCommand('insertHTML', true, '<div>vide</div>');
   }
 
   handleInsertQuoto() {
@@ -143,25 +162,54 @@ export default class GB_Rich_editor extends Component {
     this.setState({
       active: 'table'
     })
-    document.execCommand('insertHTML', false, '<br/><p>table</p>');
+    document.execCommand('insertHTML', false, '<table></table>');
   }
 
+  renderImgPop() {
+    let {imgSrc, imgHei, imgWid} = this.state
+    return(
+      <GBpop statu={this.state.imgPopStatu} title="请输入图片信息">
+        <div style={{textAlign: 'center'}}>
+          <div style={{marginBottom: '10px'}}>请输入图片地址</div>
+          <GBInputtext isRequired={true} onChange={(value) => this.setState({imgSrc: value})} />
+          <div style={{marginBottom: '10px', marginTop: '10px'}}>请输入图片高度</div>
+          <GBInputtext onChange={(value) => this.setState({imgHei: value})} />
+          <div style={{marginBottom: '10px', marginTop: '10px'}}>请输入图片宽度</div>
+          <GBInputtext onChange={(value) => this.setState({imgWid: value})} />
+        </div>
+        <div style={{textAlign: 'center'}}>
+          <GBbutton size="small" style={{marginRight: '30px'}} text="确定" onClick={
+            () => {
+              this.setState({imgPopStatu: false})
+              window.getSelection().addRange(this.state.range)
+              console.log(this.state.range)
+              document.execCommand('insertHTML', false, `<img src="${imgSrc}" width="${imgWid}" height="${imgHei}">`);
+            }
+          } />
+          <GBbutton size="small" color="white" text="取消" onClick={() => this.setState({imgPopStatu: false})} />
+        </div>
+      </GBpop>
+    )
+  }
+
+
+
   render() {
-    const {active} = this.state
+    const {active, isBold, isItalic, isUnderline, align, dent, list} = this.state
     return(
       <div className={cx(styles.editorWrap)} ref="editor">
         <div className={cx(styles.editorTool)}>
-          <button onClick={this.handleBold.bind(this)} className={cx({btnActive: 'bold' === active})}><i className={fab(fa['fa'], fa['fa-bold'])}></i></button>
-          <button onClick={this.handleItalic.bind(this)} className={cx({btnActive: 'italic' === active})}><i className={fab(fa['fa'], fa['fa-italic'])}></i></button>
-          <button onClick={this.handleUnderline.bind(this)} className={cx({btnActive: 'underline' === active})}><i className={fab(fa['fa'], fa['fa-underline'])}></i></button>
+          <button onClick={this.handleBold.bind(this)} className={cx({btnActive: isBold})}><i className={fab(fa['fa'], fa['fa-bold'])}></i></button>
+          <button onClick={this.handleItalic.bind(this)} className={cx({btnActive: isItalic})}><i className={fab(fa['fa'], fa['fa-italic'])}></i></button>
+          <button onClick={this.handleUnderline.bind(this)} className={cx({btnActive: isUnderline})}><i className={fab(fa['fa'], fa['fa-underline'])}></i></button>
 
-          <button onClick={this.handleJustifyLeft.bind(this)} className={cx({btnActive: 'align-left' === active})}><i className={fab(fa['fa'], fa['fa-align-left'])}></i></button>
-          <button onClick={this.handleJustifyCenter.bind(this)} className={cx({btnActive: 'align-center' === active})}><i className={fab(fa['fa'], fa['fa-align-center'])}></i></button>
-          <button onClick={this.handleJustifyRight.bind(this)} className={cx({btnActive: 'align-right' === active})}><i className={fab(fa['fa'], fa['fa-align-right'])}></i></button>
-          <button onClick={this.handleIndent.bind(this)} className={cx({btnActive: 'indent' === active})}><i className={fab(fa['fa'], fa['fa-indent'])}></i></button>
-          <button onClick={this.handleOutdent.bind(this)} className={cx({btnActive: 'outdent' === active})}><i className={fab(fa['fa'], fa['fa-outdent'])}></i></button>
-          <button onClick={this.handleInsertUnorderedList.bind(this)} className={cx({btnActive: 'list-ul' === active})}><i className={fab(fa['fa'], fa['fa-list-ul'])}></i></button>
-          <button onClick={this.handleInsertOrderedList.bind(this)} className={cx({btnActive: 'list-ol' === active})}><i className={fab(fa['fa'], fa['fa-list-ol'])}></i></button>
+          <button onClick={this.handleJustifyLeft.bind(this)} className={cx({btnActive: 'left' === align})}><i className={fab(fa['fa'], fa['fa-align-left'])}></i></button>
+          <button onClick={this.handleJustifyCenter.bind(this)} className={cx({btnActive: 'center' === align})}><i className={fab(fa['fa'], fa['fa-align-center'])}></i></button>
+          <button onClick={this.handleJustifyRight.bind(this)} className={cx({btnActive: 'right' === align})}><i className={fab(fa['fa'], fa['fa-align-right'])}></i></button>
+          <button onClick={this.handleIndent.bind(this)} className={cx({btnActive: 'indent' === dent})}><i className={fab(fa['fa'], fa['fa-indent'])}></i></button>
+          <button onClick={this.handleOutdent.bind(this)} className={cx({btnActive: 'outdent' === dent})}><i className={fab(fa['fa'], fa['fa-outdent'])}></i></button>
+          <button onClick={this.handleInsertUnorderedList.bind(this)} className={cx({btnActive: 'list-ul' === list})}><i className={fab(fa['fa'], fa['fa-list-ul'])}></i></button>
+          <button onClick={this.handleInsertOrderedList.bind(this)} className={cx({btnActive: 'list-ol' === list})}><i className={fab(fa['fa'], fa['fa-list-ol'])}></i></button>
 
           <button className={cx({btnActive: ' ' === active})}>Text Style</button>
 
@@ -176,7 +224,13 @@ export default class GB_Rich_editor extends Component {
         <div className={cx(styles.editorComt)} contentEditable="true" onMouseOver={this.hideSysMenu.bind(this)} onMouseOut={this.showSysMenu.bind(this)}>
 
         </div>
+
+        {
+          this.renderImgPop()
+        }
       </div>
+
+
     )
   }
 
