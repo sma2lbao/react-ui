@@ -20,7 +20,6 @@ export default class GB_Rich_editor extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      disableRightMenu: false,
       active: '',
       isBold: false,
       isItalic: false,
@@ -41,89 +40,89 @@ export default class GB_Rich_editor extends Component {
       cols: 0,
       videoPopStatu: false,
       videoSrc: '',
+      showMenu: false,
     }
   }
 
-  hideSysMenu() {
-    this.setState({
-      disableRightMenu: true
-    })
-  }
-
-  showSysMenu() {
-    this.setState({
-      disableRightMenu: false
-    })
-  }
 
   handleBold() {
     this.setState({
       isBold: !this.state.isBold
     })
     document.execCommand('bold')
+    this.setState({showMenu: false})
   }
 
   handleItalic() {
     this.setState({
       isItalic: !this.state.isItalic
     })
-    document.execCommand('italic');
+    document.execCommand('italic')
+    this.setState({showMenu: false})
   }
 
   handleUnderline() {
     this.setState({
       isUnderline: !this.state.isUnderline
     })
-    document.execCommand('underline');
+    document.execCommand('underline')
+    this.setState({showMenu: false})
   }
 
   handleJustifyLeft() {
     this.setState({
       align: 'left'
     })
-    document.execCommand('justifyLeft');
+    document.execCommand('justifyLeft')
+    this.setState({showMenu: false})
   }
 
   handleJustifyCenter() {
     this.setState({
       align: 'center'
     })
-    document.execCommand('justifyCenter');
+    document.execCommand('justifyCenter')
+    this.setState({showMenu: false})
   }
 
   handleJustifyRight() {
     this.setState({
       align: 'right'
     })
-    document.execCommand('justifyRight');
+    document.execCommand('justifyRight')
+    this.setState({showMenu: false})
   }
 
   handleIndent() {
     this.setState({
       dent: 'indent'
     })
-    document.execCommand('indent');
+    document.execCommand('indent')
+    this.setState({showMenu: false})
   }
 
   handleOutdent() {
     this.setState({
       dent: 'outdent'
     })
-    document.execCommand('outdent');
+    document.execCommand('outdent')
+    this.setState({showMenu: false})
   }
 
   handleInsertUnorderedList() {
     this.setState({
       list: 'list-ul'
     })
-    document.execCommand('insertUnorderedList');
+    document.execCommand('insertUnorderedList')
+    this.setState({showMenu: false})
   }
 
   handleInsertOrderedList() {
     this.setState({
       list: 'list-ol'
     })
-    document.execCommand('insertOrderedList');
+    document.execCommand('insertOrderedList')
+    this.setState({showMenu: false})
   }
 
   handleCreateLink() {
@@ -162,14 +161,15 @@ export default class GB_Rich_editor extends Component {
       active: 'quote-left'
     })
     document.execCommand('insertHTML', false, `<div style="background-color: #e5edf0;padding: 10px;border-left: 5px solid #645ebe;min-height: 1.5em;color: #29324a;font-size: 12px;"></div><br>`);
-
+    this.setState({showMenu: false})
   }
 
   handleInsertCode() {
     this.setState({
       active: 'code'
     })
-    document.execCommand('insertHTML', false, '<div style="padding: 10px;min-height: 1.5em;color: #fff;background-color: #29324a;"></div></br>');
+    document.execCommand('insertHTML', false, '<div style="padding: 10px;min-height: 1.5em;color: #fff;background-color: #29324a;"></div></br>')
+    this.setState({showMenu: false})
   }
 
   handleInsertTable() {
@@ -189,6 +189,7 @@ export default class GB_Rich_editor extends Component {
     // if(!range.collapsed) {
       // document.execCommand('insertHTML', false, `<span style="color: ${color}">${range.toString()}</span>`)
       document.execCommand('foreColor', false, color)
+      this.setState({showMenu: false})
     // }
   }
 
@@ -196,6 +197,7 @@ export default class GB_Rich_editor extends Component {
     let sel = window.getSelection()
     let range = sel.getRangeAt(0) ? sel.getRangeAt(0) : new Object()
     document.execCommand('fontSize', false, size)
+    this.setState({showMenu: false})
     let doms = document.getElementsByTagName('font')
     for (let i = 0; i < doms.length; i++) {
       if(doms[i].size) {
@@ -237,6 +239,15 @@ export default class GB_Rich_editor extends Component {
     }
   }
 
+  handleUndo() {
+    document.execCommand('undo')
+    this.setState({showMenu: false})
+  }
+  handleRedo() {
+    document.execCommand('redo')
+    this.setState({showMenu: false})
+  }
+
   renderImgPop() {
     let {imgSrc, imgHei, imgWid} = this.state
     return(
@@ -254,7 +265,8 @@ export default class GB_Rich_editor extends Component {
             () => {
               this.setState({imgPopStatu: false})
               window.getSelection().addRange(this.state.range)
-              document.execCommand('insertHTML', false, `<img src="${imgSrc}" width="${imgWid}" height="${imgHei}">`);
+              document.execCommand('insertHTML', false, `<img src="${imgSrc}" width="${imgWid}" height="${imgHei}">`)
+              this.setState({showMenu: false})
             }
           } />
           <GBbutton size="small" color="white" text="取消" onClick={() => this.setState({imgPopStatu: false})} />
@@ -281,10 +293,12 @@ export default class GB_Rich_editor extends Component {
               if(this.state.range.collapsed){
                 this.setState({link: '', linkText: ''})
                 document.execCommand('insertHTML', false, `<a href="${link}">${linkText}</a>`)
+                this.setState({showMenu: false})
               }
               else {
                 this.setState({link: '', linkText: ''})
-                document.execCommand('createLink', false, `${link}`);
+                document.execCommand('createLink', false, `${link}`)
+                this.setState({showMenu: false})
               }
             }
           } />
@@ -326,6 +340,7 @@ export default class GB_Rich_editor extends Component {
               }
               tableHtml += '</tbody></table>'
               document.execCommand('insertHTML', false, tableHtml)
+              this.setState({showMenu: false})
               this.setState({rows: 0, cols: 0})
             }
           } />
@@ -348,7 +363,8 @@ export default class GB_Rich_editor extends Component {
             () => {
               this.setState({videoPopStatu: false})
               window.getSelection().addRange(this.state.range)
-              document.execCommand('insertHTML', true, `<video style="width: 50%;margin-left: 25%; border: 1px solid #ddd;" controls="controls" src="${videoSrc}">不支持该标签</video>`);
+              document.execCommand('insertHTML', true, `<video style="width: 50%;margin-left: 25%; border: 1px solid #ddd;" controls="controls" src="${videoSrc}">不支持该标签</video>`)
+              this.setState({showMenu: false})
               this.setState({videoSrc: ''})
             }
           } />
@@ -358,18 +374,16 @@ export default class GB_Rich_editor extends Component {
     )
   }
 
-  handleMenuPop(event) {
-    if(2 === event.button){
-      
-    }
+  handleClose() {
+    this.setState({showMenu: false})
   }
 
-
   render() {
-    const {active, isBold, isItalic, isUnderline, align, dent, list} = this.state
+    const {active, isBold, isItalic, isUnderline, align, dent, list, showMenu} = this.state
     return(
       <div className={cx(styles.editorWrap)} ref="editor">
-        <div className={cx(styles.editorTool)}>
+        <div ref="tool" className={cx(styles.editorTool, {hidden: !showMenu})}>
+          <button onClick={this.handleClose.bind(this)} className={styles.closeBtn}><i className={fab(fa['fa'], fa['fa-close'])}></i></button>
           <button onClick={this.handleBold.bind(this)} className={cx(styles.toolBtn, {btnActive: isBold})}><i className={fab(fa['fa'], fa['fa-bold'])}></i></button>
           <button onClick={this.handleItalic.bind(this)} className={cx(styles.toolBtn, {btnActive: isItalic})}><i className={fab(fa['fa'], fa['fa-italic'])}></i></button>
           <button onClick={this.handleUnderline.bind(this)} className={cx(styles.toolBtn, {btnActive: isUnderline})}><i className={fab(fa['fa'], fa['fa-underline'])}></i></button>
@@ -381,10 +395,10 @@ export default class GB_Rich_editor extends Component {
           <button onClick={this.handleOutdent.bind(this)} className={cx(styles.toolBtn, {btnActive: 'outdent' === dent})}><i className={fab(fa['fa'], fa['fa-outdent'])}></i></button>
           <button onClick={this.handleInsertUnorderedList.bind(this)} className={cx(styles.toolBtn, {btnActive: 'list-ul' === list})}><i className={fab(fa['fa'], fa['fa-list-ul'])}></i></button>
           <button onClick={this.handleInsertOrderedList.bind(this)} className={cx(styles.toolBtn, {btnActive: 'list-ol' === list})}><i className={fab(fa['fa'], fa['fa-list-ol'])}></i></button>
-          <button onClick={this.handleCreateLink.bind(this)} className={cx(styles.toolBtn, {btnActive: 'link' === active})}><i className={fab(fa['fa'], fa['fa-link'])}></i></button>
-          <button onClick={this.handleInsertImage.bind(this)} className={cx(styles.toolBtn, {btnActive: 'image' === active})}><i className={fab(fa['fa'], fa['fa-image'])}></i></button>
-          <button onClick={this.handleInsertVideo.bind(this)} className={cx(styles.toolBtn, {btnActive: 'play' === active})}><i className={fab(fa['fa'], fa['fa-play'])}></i></button>
-          <button onClick={this.handleInsertQuoto.bind(this)} className={cx(styles.toolBtn, {btnActive: 'quote-left' === active})}><i className={fab(fa['fa'], fa['fa-quote-left'])}></i></button>
+          <button onClick={this.handleCreateLink.bind(this)} className={cx(styles.toolBtn)}><i className={fab(fa['fa'], fa['fa-link'])}></i></button>
+          <button onClick={this.handleInsertImage.bind(this)} className={cx(styles.toolBtn)}><i className={fab(fa['fa'], fa['fa-image'])}></i></button>
+          <button onClick={this.handleInsertVideo.bind(this)} className={cx(styles.toolBtn)}><i className={fab(fa['fa'], fa['fa-play'])}></i></button>
+          <button onClick={this.handleInsertQuoto.bind(this)} className={cx(styles.toolBtn)}><i className={fab(fa['fa'], fa['fa-quote-left'])}></i></button>
           <button onClick={this.handleInsertCode.bind(this)} className={cx(styles.toolBtn, {btnActive: 'code' === active})}><i className={fab(fa['fa'], fa['fa-code'])}></i></button>
           <button onClick={this.handleInsertTable.bind(this)} className={cx(styles.toolBtn, {btnActive: 'table' === active})}><i className={fab(fa['fa'], fa['fa-table'])}></i></button>
           <div className={styles.fontWrap}>
@@ -411,10 +425,11 @@ export default class GB_Rich_editor extends Component {
               <li><button onClick={this.handleFontSize.bind(this, '1')}>13px</button></li>
             </ul>
           </div>
-
+          <button onClick={this.handleUndo.bind(this)} className={cx(styles.toolBtn)}><i className={fab(fa['fa'], fa['fa-undo'])}></i></button>
+          <button onClick={this.handleRedo.bind(this)} className={cx(styles.toolBtn)}><i className={fab(fa['fa'], fa['fa-repeat'])}></i></button>
         </div>
 
-        <div ref="editorComt" style={{padding: '20px', color: '#29324a', fontSize: '12px'}} className={cx(styles.editorComt)} onClick={this.handleMenuPop.bind(this)} contentEditable="true" onMouseOver={this.hideSysMenu.bind(this)} onMouseOut={this.showSysMenu.bind(this)}>
+        <div ref="editorComt" style={{padding: '20px', color: '#29324a', fontSize: '12px'}} className={cx(styles.editorComt)}  contentEditable="true" >
 
         </div>
 
@@ -440,12 +455,12 @@ export default class GB_Rich_editor extends Component {
     document.getElementsByTagName('body')[0].addEventListener('contextmenu', (event) => {
       let targetDom = event.target
       let disableRightMenu = false
-      console.log(this.refs.editor)
       targetDom === this.refs.editor ? disableRightMenu = true : disableRightMenu = false
       if (!disableRightMenu) {
         for(let dom of this.refs.editor.childNodes) {
           if(dom === targetDom) {
             disableRightMenu = true
+            this.setState({showMenu: true})
             break
           }
         }
@@ -454,6 +469,7 @@ export default class GB_Rich_editor extends Component {
         for(let dom of this.refs.editorComt.childNodes) {
           if(dom === targetDom) {
             disableRightMenu = true
+            this.setState({showMenu: true})
             break
           }
         }
@@ -461,12 +477,27 @@ export default class GB_Rich_editor extends Component {
 
       if(disableRightMenu) {
         event.returnValue = false
+
+        console.log(event.screenX, event.screenY)
+        if(document.body.clientWidth / 2 < event.clientX) {
+          this.refs.tool.style.left = event.clientX - 375 + 'px'
+        }
+        else {
+          this.refs.tool.style.left = event.clientX + 'px'
+        }
+        if(window.innerHeight  < event.clientY + 150) {
+          this.refs.tool.style.top = event.clientY - 150 + 'px'
+        }
+        else {
+          this.refs.tool.style.top = event.clientY + 'px'
+        }
       }
       else {
         event.returnValue = true
       }
     })
   }
+
 
   componentDidMount() {
     this.listennerBody.bind(this)()
