@@ -1,6 +1,18 @@
 @charset "UTF-8";
-.editorWrap{border: 1px solid #9db1bc;width: 960px;margin: 0 auto;box-sizing: border-box;}
+.editorWrap{border: 1px solid #9db1bc;min-width: 960px;margin: 0 auto;box-sizing: border-box;background-color: #fff;}
 .editorTool{height: 90px;background-color: #080a0a;width: 375px;border-radius: 3px;box-shadow: 2px 2px 5px #888;padding: 10px;box-sizing: border-box;}
 .editorComt{min-height: 200px;outline: none;}
-.editorTool button{height: 30px;width: 30px;border-radius: 3px;color: #fff;background-color: #080a0a;border: none;outline: none;}
+.toolBtn{height: 30px;width: 30px;border-radius: 3px;color: #fff;background-color: #080a0a;border: none;outline: none;}
 .editorTool .btnActive{border: 1px solid #696969;color: #df3c37;}
+.fontWrap{display: inline-block;position: relative;}
+.fontWrap ul,
+.fontWrap li{list-style: none;margin: 0;padding: 0;}
+.fontWrap .toolBtn:hover{border: 1px solid #696969;color: #df3c37;}
+.listWrap{position: absolute;top: 30px;right: 0;width: 50px;border: 1px solid #ddd;text-align: center;background-color: #fff;display: none;}
+.listWrap:hover,
+.fontWrap:hover .listWrap{display: block;}
+.fontWrap:hover .toolBtn{border: 1px solid #696969;color: #df3c37;}
+.fontWrap li{height: 25px;line-height: 25px;font-size: 12px;font-weight: 500;}
+.fontWrap li:hover{background-color: #9eb1bc;color: #fff;cursor: default;}
+.fontWrap li button:hover,
+.fontWrap li button{background-color: transparent;border: none;outline: none;}
