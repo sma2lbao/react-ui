@@ -35,7 +35,10 @@ export default class App extends Component {
         <hr />
         <GBrefresh playing={true} radius={80} color="red" bgColor="#f5f8fa"/>
         <hr />
-        <GBRicheditor />
+        <GBRicheditor onChange={(html) => this.refs.htmlWrap.innerHTML = html} />
+        <hr />
+        <div ref="htmlWrap"></div>
+        <hr />
       </div>
     )
   }

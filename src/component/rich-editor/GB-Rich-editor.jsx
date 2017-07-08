@@ -325,15 +325,15 @@ export default class GB_Rich_editor extends Component {
               window.getSelection().addRange(this.state.range)
               let row = parseInt(this.state.rows)
               let col = parseInt(this.state.cols)
-              let tableHtml = '<table><tbody>'
+              let tableHtml = '<table style="border: 1px solid #29324a;border-collapse: collapsed;width: 100%;" cellspacing="0"><tbody>'
               for (let i = 0; i < row; i++) {
                 tableHtml += '<tr>'
                 for(let j = 0; j < col; j++) {
-                  if(0 === j) {
-                    tableHtml += '<td></td>'
+                  if(0 === i) {
+                    tableHtml += '<th style="border: 1px solid #29324a;height: 40px;"></th>'
                   }
                   else {
-                    tableHtml += '<td></td>'
+                    tableHtml += '<td style="border: 1px solid #29324a;height: 40px;"></td>'
                   }
                 }
                 tableHtml += '</tr>'
@@ -376,6 +376,12 @@ export default class GB_Rich_editor extends Component {
 
   handleClose() {
     this.setState({showMenu: false})
+  }
+
+  handleChange() {
+    if (this.props.onChange) {
+      this.props.onChange(this.refs.editorComt.innerHTML)
+    }
   }
 
   render() {
@@ -429,7 +435,7 @@ export default class GB_Rich_editor extends Component {
           <button onClick={this.handleRedo.bind(this)} className={cx(styles.toolBtn)}><i className={fab(fa['fa'], fa['fa-repeat'])}></i></button>
         </div>
 
-        <div ref="editorComt" style={{padding: '20px', color: '#29324a', fontSize: '12px'}} className={cx(styles.editorComt)}  contentEditable="true" >
+        <div ref="editorComt" style={{padding: '20px', color: '#29324a', fontSize: '12px'}} className={cx(styles.editorComt)}  contentEditable="true" onInput={this.handleChange.bind(this)} >
 
         </div>
 
@@ -457,7 +463,8 @@ export default class GB_Rich_editor extends Component {
       let disableRightMenu = false
       targetDom === this.refs.editor ? disableRightMenu = true : disableRightMenu = false
       if (!disableRightMenu) {
-        for(let dom of this.refs.editor.childNodes) {
+        let childNodes = this.getChildNodes(this.refs.editor)
+        for(let dom of childNodes) {
           if(dom === targetDom) {
             disableRightMenu = true
             this.setState({showMenu: true})
@@ -477,8 +484,6 @@ export default class GB_Rich_editor extends Component {
 
       if(disableRightMenu) {
         event.returnValue = false
-
-        console.log(event.screenX, event.screenY)
         if(document.body.clientWidth / 2 < event.clientX) {
           this.refs.tool.style.left = event.clientX - 375 + 'px'
         }
@@ -498,8 +503,25 @@ export default class GB_Rich_editor extends Component {
     })
   }
 
+  getChildNodes(ele) {
+    let nodes = []
+    nodes.push(ele)
+    let child = ele.childNodes
+    for(let i = 0; i < child.length; i++) {
+      if (child[i].childNodes.length > 0) {
+        let tempLst = this.getChildNodes(child[i])
+        nodes = nodes.concat(tempLst)
+      }
+      else {
+        nodes.push(child[i])
+      }
+    }
+    return nodes
+  }
 
   componentDidMount() {
     this.listennerBody.bind(this)()
+    // let nodeLst = this.getChildNodes(this.refs.tool)
+    // console.log(nodeLst);
   }
 }
