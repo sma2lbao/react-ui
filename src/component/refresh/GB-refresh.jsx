@@ -20,9 +20,6 @@ export default class GB_refresh extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      playing: props.playing
-    }
   }
 
   render() {
@@ -31,7 +28,7 @@ export default class GB_refresh extends Component {
         <div
           className={
             cx(styles.refreshWrap,
-              {refreshAnimation: this.state.playing,
+              {refreshAnimation: this.props.playing,
                 red: 'red' === this.props.color,
                 purple: 'purple' === this.props.color,
                 purple: 'purple' === this.props.color,

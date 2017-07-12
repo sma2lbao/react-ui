@@ -5,7 +5,7 @@ let cx = cns.bind(styles)
 
 export default class GB_carousel extends Component {
   static defaultProps = {
-    timeout: 4000,
+    timeout: 3000,
     imgs: ['http://pic.58pic.com/58pic/14/27/45/71r58PICmDM_1024.jpg', 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg', 'http://pic33.photophoto.cn/20141204/0006019060393096_b.jpg']
   }
 
@@ -19,7 +19,8 @@ export default class GB_carousel extends Component {
     super(props)
     this.state = {
       imgs: this.props.imgs,
-      showImg: 0
+      showImg: 0,
+      interval: '',
     }
   }
 
@@ -71,29 +72,36 @@ export default class GB_carousel extends Component {
   }
 
   componentDidMount() {
-
+    this.setState({
+      disabled: false
+    })
     let carouselAuto = this.startInterval()
-
     this.refs.wrap.addEventListener('mouseover', () => {
       clearInterval(carouselAuto)
     })
     this.refs.wrap.addEventListener('mouseout', () => {
       carouselAuto = this.startInterval()
+      this.setState({interval: carouselAuto})
     })
 
     this.refs.leftCtrl.addEventListener('click', () => {
       clearInterval(carouselAuto)
       setTimeout(() => {
         carouselAuto = this.startInterval()
+        this.setState({interval: carouselAuto})
       }, 0)
     })
     this.refs.rightCtrl.addEventListener('click', () => {
       clearInterval(carouselAuto)
       setTimeout(() => {
         carouselAuto = this.startInterval()
+        this.setState({interval: carouselAuto})
       }, 0)
     })
 
+  }
+  componentWillUnmount() {
+    clearInterval(this.state.interval)
   }
 
 
@@ -128,7 +136,7 @@ export default class GB_carousel extends Component {
         <div className={styles.imgNav}>
           {imgs.map((value, index) => {
             return(
-              <span className={cx(styles.imgNavItem, {hidden: index != showImg})}></span>
+              <span key={index} className={cx(styles.imgNavItem, {hidden: index != showImg})}></span>
             )
           })}
         </div>

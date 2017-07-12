@@ -8,6 +8,7 @@ export default class GB_Input_text extends Component {
     isRequired: false,
     warn: false,
     value: '',
+    type: 'text'
   }
 
   static propTypes = {
@@ -15,7 +16,8 @@ export default class GB_Input_text extends Component {
     warn: PropTypes.bool,
     onChange: PropTypes.func,
     vaild: PropTypes.func,
-    value: PropTypes.string.isRequired
+    value: PropTypes.string.isRequired,
+    type: PropTypes.string
   }
 
   constructor(props) {
@@ -40,10 +42,10 @@ export default class GB_Input_text extends Component {
   }
 
   render() {
-    const { isRequired, warn, value} = this.props
+    const { isRequired, warn, value, type} = this.props
     return (
       <div className={cx(styles.wrapper)}>
-        <input type="text" value={value} className={cx(styles.def, {warn: this.state.warn})} onChange={this.handleChange.bind(this)} ref="input" />
+        <input type={type} value={value} className={cx(styles.def, {warn: this.state.warn})} onChange={this.handleChange.bind(this)} ref="input" />
         <i className={cx({required: isRequired})}></i>
         <span className={cx(styles.warnMsg)}>{this.state.warnMsg}</span>
       </div>

@@ -23,7 +23,6 @@ export default class GB_paging extends Component {
     super(props)
     this.state = {
       current: props.current,
-      pageNum: Math.ceil(props.total/props.size)
     }
   }
 
@@ -41,7 +40,7 @@ export default class GB_paging extends Component {
   }
 
   handleNext() {
-    if(this.state.pageNum <= this.state.current) {
+    if(Math.ceil(this.props.total/this.props.size) <= this.state.current) {
       return
     }
     this.setState({
@@ -85,7 +84,7 @@ export default class GB_paging extends Component {
   render() {
 
     const {size, total, current} = this.props
-    let pageLst = new Array(this.state.pageNum)
+    let pageLst = new Array(Math.ceil(this.props.total/this.props.size))
     for (let i = 0; i < pageLst.length; i++) {
       pageLst[i] = i + 1
     }
@@ -96,7 +95,7 @@ export default class GB_paging extends Component {
         className={cx(styles.pageItem,
           {
             pageItemActive: i + 1 === this.state.current,
-            hidden: (this.state.pageNum -  5 < this.state.current ? i + 1 < this.state.pageNum - 8 : i + 1 < this.state.current - 4)
+            hidden: (Math.ceil(this.props.total/this.props.size) -  5 < this.state.current ? i + 1 < Math.ceil(this.props.total/this.props.size) - 8 : i + 1 < this.state.current - 4)
                     || (5 >= this.state.current ? i + 1 > 9 : i + 1 > this.state.current + 4),
           })}>{i + 1}</button>)
     }
@@ -111,7 +110,7 @@ export default class GB_paging extends Component {
           </button>
             {domLst}
           <button
-              className={cx(styles.pageItem, {disabled: this.state.current === this.state.pageNum || 0 === this.state.pageNum})}
+              className={cx(styles.pageItem, {disabled: this.state.current === Math.ceil(this.props.total/this.props.size) || 0 === Math.ceil(this.props.total/this.props.size)})}
               onClick={this.handleNext.bind(this)}
           >
             next
@@ -120,9 +119,9 @@ export default class GB_paging extends Component {
 
           <div className={cx(styles.prog)}>
             {
-              new Array(this.state.pageNum).fill('1').map((value, index) => {
+              new Array(Math.ceil(this.props.total/this.props.size)).fill('1').map((value, index) => {
                 return(
-                  <span className={cx(styles.progItem, {progItemActive: index + 1 <= this.state.current })} ref="item"  onClick={this.handleProgClick.bind(this, (index + 1))}>
+                  <span key={index} className={cx(styles.progItem, {progItemActive: index + 1 <= this.state.current })} ref="item"  onClick={this.handleProgClick.bind(this, (index + 1))}>
                     <span className={cx(styles.hoverPos)} ref="hoverPage">
                       <GBmsg type="hover" arrow='top' title={index + 1} />
                     </span>
@@ -137,9 +136,8 @@ export default class GB_paging extends Component {
     )
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     this.handleDefCurrent.bind(this)()
-
     {
       var itemWid = this.refs.item.clientWidth
       var doms = document.getElementsByClassName(styles.hoverPos)

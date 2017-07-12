@@ -17,6 +17,11 @@ export default class GB_button extends Component {
     size: 'normal',
     disabled: false,
   }
+  handleClick() {
+    if(this.props.onClick) {
+      this.props.onClick()
+    }
+  }
 
   render() {
     const {color, size} = this.props
@@ -41,7 +46,7 @@ export default class GB_button extends Component {
           button: true,
           disabled: this.props.disabled
         }) }
-        onClick={this.props.onClick} style={this.props.style} type="button">
+        onClick={this.handleClick.bind(this)} style={this.props.style} type="button">
         {this.props.text}
       </button>
     )

@@ -15,8 +15,8 @@
 
 .prog{height: 15px;white: 100%;margin-top: 20px;border-radius: 7.5px;background-color: #29324a;display: flex;}
 .progItem{height: 15px;flex: 1;background-color: #29324a;position: relative;}
-.progItem:first-of-type{border-top-left-radius: 50%;border-bottom-left-radius: 50%;}
-.progItem:last-of-type{border-top-right-radius: 50%;border-bottom-right-radius: 50%;}
+.progItem:first-of-type{border-top-left-radius: 7.5px;border-bottom-left-radius: 7.5px;}
+.progItem:last-of-type{border-top-right-radius: 7.5px;border-bottom-right-radius: 7.5px;}
 .progItemActive{background-color: #1abcb0;}
 .hoverPos{position: absolute;top: 25px;left: 0;visibility: hidden;}
 .progItem:hover .hoverPos{visibility: visible;}

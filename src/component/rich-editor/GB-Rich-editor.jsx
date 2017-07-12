@@ -435,7 +435,7 @@ export default class GB_Rich_editor extends Component {
           <button onClick={this.handleRedo.bind(this)} className={cx(styles.toolBtn)}><i className={fab(fa['fa'], fa['fa-repeat'])}></i></button>
         </div>
 
-        <div ref="editorComt" style={{padding: '20px', color: '#29324a', fontSize: '12px'}} className={cx(styles.editorComt)}  contentEditable="true" onInput={this.handleChange.bind(this)} >
+        <div ref="editorComt" style={{color: '#29324a', fontSize: '12px'}} className={cx(styles.editorComt)}  contentEditable="true" onInput={this.handleChange.bind(this)} >
 
         </div>
 

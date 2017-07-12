@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.editorWrap{border: 1px solid #9db1bc;min-width: 960px;margin: 0 auto;box-sizing: border-box;background-color: #fff;position: relative;}
+.editorWrap{border: 1px solid #9db1bc;width: 100%;margin: 0 auto;box-sizing: border-box;background-color: #fff;position: relative;}
 .editorTool{height: 90px;background-color: #080a0a;width: 375px;border-radius: 3px;box-shadow: 2px 2px 5px #888;padding: 10px;box-sizing: border-box;position: fixed;}
 .editorComt{min-height: 200px;outline: none;}
 .toolBtn{height: 30px;width: 30px;border-radius: 3px;color: #fff;background-color: #080a0a;border: none;outline: none;}
