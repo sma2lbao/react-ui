@@ -8,7 +8,6 @@ export default class GB_Dropdown_button extends Component {
     arry: new Array(),
     disabled: false,
     color: 'green',
-    disabled: false
   }
 
   static propTypes = {
