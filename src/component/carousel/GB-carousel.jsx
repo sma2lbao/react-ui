@@ -6,12 +6,12 @@ let cx = cns.bind(styles)
 export default class GB_carousel extends Component {
   static defaultProps = {
     timeout: 3000,
-    imgs: ['http://pic.58pic.com/58pic/14/27/45/71r58PICmDM_1024.jpg', 'http://pic17.nipic.com/20111122/6759425_152002413138_2.jpg', 'http://pic33.photophoto.cn/20141204/0006019060393096_b.jpg']
+    imgs: ['', '', '']
   }
 
   static propTypes = {
     imgs: PropTypes.array,
-    onChange: PropTypes.func,
+    onClick: PropTypes.func,
     timeout: PropTypes.number
   }
 
@@ -51,8 +51,8 @@ export default class GB_carousel extends Component {
   }
 
   handleImgActive(value, index) {
-    if(this.props.onChange) {
-      this.props.onChange(value, index)
+    if(this.props.onClick) {
+      this.props.onClick(value, index)
     }
   }
 

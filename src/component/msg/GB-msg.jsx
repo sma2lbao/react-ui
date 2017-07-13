@@ -13,7 +13,7 @@ export default class GB_msg extends Component {
 
   static propTypes = {
     type: PropTypes.oneOf(['alert', 'hover']),
-    title: PropTypes.string,
+    // title: PropTypes.string,
     text: PropTypes.string,
     arrow: PropTypes.oneOf(['left', 'right', 'top', 'bottom'])
   }

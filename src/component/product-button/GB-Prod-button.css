@@ -21,3 +21,5 @@
 .prodIconBtn{height: 32px;border: 1px solid #9eb1bc;background-color: #fff;border-radius: 3px;padding: 0 15px;color: #1d396b;}
 .prodIconBtn:hover{background-color: #fbfeff;box-shadow:0 2px 5px #ddd;}
 .iconDisabled,.iconDisabled:hover{background-color: #fbfeff;color: #1d396b;cursor: not-allowed;box-shadow:0 2px 5px #ddd inset;}
+
+.tstIcon{background-color: purple;}

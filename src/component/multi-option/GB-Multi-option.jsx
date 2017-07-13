@@ -18,7 +18,7 @@ export default class GB_Multe_option extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      active: 0
+      active: props.active
     }
   }
 
@@ -36,7 +36,7 @@ export default class GB_Multe_option extends Component {
     return (
       <div className={cx(styles.warpper)}>
         {lst.map((value, index) => {
-          return <span style={this.props.style} className={cx(styles.item, {itemActive: index === this.state.active})} onClick={this.handleClick.bind(this, index)}>{value}</span>
+          return <span key={index} style={this.props.style} className={cx(styles.item, {itemActive: index === this.state.active})} onClick={this.handleClick.bind(this, index)}>{value}</span>
         })}
 
       </div>

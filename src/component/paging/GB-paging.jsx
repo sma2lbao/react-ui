@@ -24,6 +24,7 @@ export default class GB_paging extends Component {
     this.state = {
       current: props.current,
     }
+    this.handleDefCurrent()
   }
 
   handlePrev() {
@@ -91,6 +92,7 @@ export default class GB_paging extends Component {
     let domLst = new Array()
     for (let i = 0; i < pageLst.length; i++) {
       domLst.push(<button
+        key={i}
         onClick={this.handlePage.bind(this)}
         className={cx(styles.pageItem,
           {
@@ -137,7 +139,7 @@ export default class GB_paging extends Component {
   }
 
   componentDidUpdate() {
-    this.handleDefCurrent.bind(this)()
+    // this.handleDefCurrent.bind(this)()
     {
       var itemWid = this.refs.item.clientWidth
       var doms = document.getElementsByClassName(styles.hoverPos)

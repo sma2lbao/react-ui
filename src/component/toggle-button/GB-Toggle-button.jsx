@@ -15,7 +15,7 @@ export default class GB_Toggle_button extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: this.props.default
+      value: this.props.value
     }
   }
 

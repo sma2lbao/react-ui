@@ -14,8 +14,7 @@ export default class GB_select extends Component {
   }
 
   static propTypes = {
-    text: PropTypes.string,
-    getValue: PropTypes.func
+    // getValue: PropTypes.func
   }
 
   handleChildClick(event) {

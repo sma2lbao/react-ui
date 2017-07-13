@@ -1,10 +1,20 @@
 import React, { Compoent } from 'react'
 import ReactDOM from 'react-dom'
-// import App from './App.jsx'
 // import Help from './component/button/Help.jsx'
 // import Help from './component/dropdown-button/Help.js'
 // import Help from './component/input-text/Help.js'
 // import Help from './component/rich-editor/Help.jsx'
-import Help from './component/refresh/Help.jsx'
-ReactDOM.render(<Help />,
+// import Help from './component/refresh/Help.jsx'
+// import Help from './component/toggle-button/Help.jsx'
+// import Help from './component/radio/Help.jsx'
+// import Help from './component/product-button/Help.jsx'
+// import Help from './component/pop/Help.jsx'
+// import Help from './component/paging/Help.jsx'
+// import Help from './component/multi-option/Help.jsx'
+// import Help from './component/msg/Help.jsx'
+// import Help from './component/input-select/Help.jsx'
+// import Help from './component/carousel/Help.jsx'
+import AppRouter from './App.jsx'
+
+ReactDOM.render(<AppRouter />,
  document.getElementById('root'));
