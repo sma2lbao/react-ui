@@ -1,5 +1,0 @@
-@charset "UTF-8";
-
-.toggleWrapDef{display: inline-block;width: 52px;height: 30px;line-height: 30px;background-color: #cdd7dc;padding: 2px;box-sizing: border-box;border-radius: 15px;text-align: left;vertical-align: middle;}
-.toggleComt{display: inline-block;width: 26px;height: 26px;border-radius: 50%;background-color: #fff;}
-.toggleWrapActive{text-align: right;background-color: #1abcb0;}

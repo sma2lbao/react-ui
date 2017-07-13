@@ -1,9 +1,0 @@
-@charset "UTF-8";
-
-.def{width: 290px;height: 48px;font-size: 14px;border-radius: 5px;border: 1px solid #dfe7eb;box-sizing: border-box;padding: 0 20px;outline: none;color: #3a4563;padding-right: 30px;}
-.def:focus{border-color: #1abcb0;}
-.wrapper{display: inline-block;position: relative;}
-.required::after{content: "*";position: absolute;right: 20px;top: 50%;margin-top: -9px;font-style: normal;color: #1abcb0;}
-.warn{border-color: #f16856;}
-.warn:focus{border-color: #f16856;}
-.warnMsg{font-size: 12px;color: #f16856;position: absolute;bottom: -22px;left: 5px;}
